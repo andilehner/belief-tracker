@@ -1,0 +1,505 @@
+<!-- filepath: /belief-tracker/belief-tracker/belieftracker.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Self-Limiting Beliefs Transformation Worksheet</title>
+    <style>
+        @media print {
+            body { 
+                margin: 0.5in;
+                font-size: 11pt;
+                line-height: 1.3;
+            }
+            .no-print { display: none; }
+            .page-break { page-break-after: always; }
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.5;
+            color: #2c3e50;
+            background: white;
+            margin: 0;
+            padding: 20px;
+            max-width: 8.5in;
+            margin: 0 auto;
+        }
+
+        .worksheet-header {
+            text-align: center;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        .worksheet-title {
+            font-size: 24pt;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .worksheet-subtitle {
+            font-size: 14pt;
+            color: #667eea;
+            font-style: italic;
+        }
+
+        .instructions {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .instructions h2 {
+            color: #667eea;
+            font-size: 16pt;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .instructions ol {
+            padding-left: 20px;
+        }
+
+        .instructions li {
+            margin-bottom: 8px;
+            font-size: 11pt;
+        }
+
+        .entry-section {
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            overflow: hidden;
+        }
+
+        .entry-header {
+            background: #667eea;
+            color: white;
+            padding: 10px 15px;
+            font-weight: bold;
+            font-size: 14pt;
+        }
+
+        .entry-content {
+            padding: 15px;
+        }
+
+        .field-group {
+            margin-bottom: 20px;
+        }
+
+        .field-label {
+            font-weight: bold;
+            color: #2c3e50;
+            font-size: 12pt;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .field-input {
+            width: 100%;
+            min-height: 40px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 8px;
+            font-size: 11pt;
+            font-family: inherit;
+            background: #fafafa;
+        }
+
+        .field-input.large {
+            min-height: 60px;
+        }
+
+        .field-input.small {
+            min-height: 30px;
+            max-width: 200px;
+        }
+
+        .two-column {
+            display: flex;
+            gap: 15px;
+        }
+
+        .two-column .field-group {
+            flex: 1;
+        }
+
+        .tips-box {
+            background: #e8f4f8;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin: 20px 0;
+            font-size: 10pt;
+            color: #5a6c7d;
+        }
+
+        .tips-title {
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 8px;
+        }
+
+        .footer-note {
+            text-align: center;
+            font-size: 10pt;
+            color: #6c757d;
+            margin-top: 40px;
+            font-style: italic;
+            border-top: 1px solid #e9ecef;
+            padding-top: 15px;
+        }
+
+        @media screen {
+            body {
+                background: #f5f7fa;
+                padding: 40px 20px;
+            }
+            
+            .worksheet-container {
+                background: white;
+                padding: 40px;
+                border-radius: 10px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+                max-width: 8.5in;
+                margin: 0 auto;
+            }
+        }
+
+    
+
+        .print-button:hover {
+            background: #5a67d8;
+        }
+
+        @media (max-width: 768px) {
+            .two-column {
+                flex-direction: column;
+            }
+            
+            body {
+                padding: 10px;
+            }
+            
+            .worksheet-container {
+                padding: 20px;
+            }
+            
+        
+        }
+    </style>
+</head>
+
+<script>
+// Save all fields to localStorage
+function saveWorksheet() {
+    document.querySelectorAll('.field-input').forEach((el, idx) => {
+        localStorage.setItem('belieftracker_field_' + idx, el.value);
+    });
+}
+
+// Load all fields from localStorage
+function loadWorksheet() {
+    document.querySelectorAll('.field-input').forEach((el, idx) => {
+        const val = localStorage.getItem('belieftracker_field_' + idx);
+        if (val !== null) el.value = val;
+    });
+}
+
+// Save on every change
+document.addEventListener('DOMContentLoaded', () => {
+    loadWorksheet();
+    document.querySelectorAll('.field-input').forEach((el) => {
+        el.addEventListener('input', saveWorksheet);
+    });
+});
+</script>
+</body>
+</html>
+
+<body>
+    
+    <div class="worksheet-container">
+        <div class="worksheet-header">
+            <div class="worksheet-title">Breakthrough Self-Limiting Beliefs Within 1 Week</div>
+            <div class="worksheet-subtitle">7-Day Transformation Worksheet</div>
+        </div>
+
+        <div class="instructions">
+            <h2>📋 Your 7-Day Breakthrough Challenge</h2>
+            <p style="text-align: center; font-weight: bold; color: #667eea; margin-bottom: 15px;">Complete one entry each day for 7 consecutive days to transform your mindset!</p>
+            <ol>
+                <li><strong>Record each situation or event</strong> where a limiting belief arises. Be specific about what triggered the belief.</li>
+                <li><strong>Clearly challenge each belief</strong> by providing counter-evidence or questioning its validity. Ask yourself: "Is this really true? What evidence contradicts this?"</li>
+                <li><strong>Reframe the belief</strong> into a positive, empowering statement that serves your growth and goals.</li>
+                <li><strong>Note any observations and outcomes</strong> from applying your reframed belief in real situations.</li>
+                <li><strong>Regularly review your entries</strong> to spot patterns and track your personal growth journey.</li>
+            </ol>
+        </div>
+
+        <div class="tips-box">
+            <div class="tips-title">💡 7-Day Challenge Tips:</div>
+            • Commit to one entry per day for maximum impact • Morning or evening works best for reflection • Be honest and specific with yourself • Small breakthroughs lead to big transformations • Celebrate each day you complete!
+        </div>
+
+        <!-- Entry 1 -->
+        <div class="entry-section">
+            <div class="entry-header">Day 1 - First Breakthrough</div>
+            <div class="entry-content">
+                <div class="field-group">
+                    <label class="field-label">📅 Date:</label>
+                    <input type="text" class="field-input small" placeholder="e.g., March 15, 2025">
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">🎭 Situation/Event:</label>
+                    <textarea class="field-input" placeholder="Describe what happened that triggered the limiting belief. Be specific about the context, people involved, and circumstances."></textarea>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">🚫 Limiting Belief:</label>
+                    <textarea class="field-input" placeholder="What negative thought or belief came up? Write exactly what you told yourself. (e.g., 'I'm not smart enough,' 'I always mess things up')"></textarea>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">🔍 Challenge to Belief:</label>
+                    <textarea class="field-input large" placeholder="Question this belief. What evidence contradicts it? When has the opposite been true? What would you tell a friend who had this belief?"></textarea>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">✨ Reframed Empowering Belief:</label>
+                    <textarea class="field-input" placeholder="Transform the limiting belief into a positive, empowering statement that serves your growth. Make it specific and actionable."></textarea>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">📝 Observations & Outcome:</label>
+                    <textarea class="field-input large" placeholder="How did it feel to challenge the belief? What happened when you tried the new empowering belief? Any changes in behavior or mood?"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- Entry 2 -->
+        <div class="entry-section">
+            <div class="entry-header">Day 2 - Digging Deeper</div>
+            <div class="entry-content">
+                <div class="field-group">
+                    <label class="field-label">📅 Date:</label>
+                    <input type="text" class="field-input small">
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">🎭 Situation/Event:</label>
+                    <textarea class="field-input"></textarea>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">🚫 Limiting Belief:</label>
+                    <textarea class="field-input"></textarea>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">🔍 Challenge to Belief:</label>
+                    <textarea class="field-input large"></textarea>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">✨ Reframed Empowering Belief:</label>
+                    <textarea class="field-input"></textarea>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">📝 Observations & Outcome:</label>
+                    <textarea class="field-input large"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- Entry 3 -->
+        <div class="entry-section">
+            <div class="entry-header">Day 3 - Finding Patterns</div>
+            <div class="entry-content">
+                <div class="field-group">
+                    <label class="field-label">📅 Date:</label>
+                    <input type="text" class="field-input small">
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">🎭 Situation/Event:</label>
+                    <textarea class="field-input"></textarea>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">🚫 Limiting Belief:</label>
+                    <textarea class="field-input"></textarea>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">🔍 Challenge to Belief:</label>
+                    <textarea class="field-input large"></textarea>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">✨ Reframed Empowering Belief:</label>
+                    <textarea class="field-input"></textarea>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">📝 Observations & Outcome:</label>
+                    <textarea class="field-input large"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <!-- Entry 4 -->
+        <div class="entry-section">
+            <div class="entry-header">Day 4 - Midweek Momentum</div>
+            <div class="entry-content">
+                <div class="field-group">
+                    <label class="field-label">📅 Date:</label>
+                    <input type="text" class="field-input small">
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">🎭 Situation/Event:</label>
+                    <textarea class="field-input"></textarea>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">🚫 Limiting Belief:</label>
+                    <textarea class="field-input"></textarea>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">🔍 Challenge to Belief:</label>
+                    <textarea class="field-input large"></textarea>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">✨ Reframed Empowering Belief:</label>
+                    <textarea class="field-input"></textarea>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">📝 Observations & Outcome:</label>
+                    <textarea class="field-input large"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- Entry 5 -->
+        <div class="entry-section">
+            <div class="entry-header">Day 5 - Gaining insights</div>
+            <div class="entry-content">
+                <div class="field-group">
+                    <label class="field-label">📅 Date:</label>
+                    <input type="text" class="field-input small">
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">🎭 Situation/Event:</label>
+                    <textarea class="field-input"></textarea>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">🚫 Limiting Belief:</label>
+                    <textarea class="field-input"></textarea>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">🔍 Challenge to Belief:</label>
+                    <textarea class="field-input large"></textarea>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">✨ Reframed Empowering Belief:</label>
+                    <textarea class="field-input"></textarea>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">📝 Observations & Outcome:</label>
+                    <textarea class="field-input large"></textarea>
+                </div>
+            </div>
+        </div>
+
+                <!-- Entry 6 -->
+        <div class="entry-section">
+            <div class="entry-header">Day 6 - Nearing Completion</div>
+            <div class="entry-content">
+                <div class="field-group">
+                    <label class="field-label">📅 Date:</label>
+                    <input type="text" class="field-input small">
+                </div>
+                <div class="field-group">
+                    <label class="field-label">🎭 Situation/Event:</label>
+                    <textarea class="field-input"></textarea>
+                </div>
+                <div class="field-group">
+                    <label class="field-label">🚫 Limiting Belief:</label>
+                    <textarea class="field-input"></textarea>
+                </div>
+                <div class="field-group">
+                    <label class="field-label">🔍 Challenge to Belief:</label>
+                    <textarea class="field-input large"></textarea>
+                </div>
+                <div class="field-group">
+                    <label class="field-label">✨ Reframed Empowering Belief:</label>
+                    <textarea class="field-input"></textarea>
+                </div>
+                <div class="field-group">
+                    <label class="field-label">📝 Observations & Outcome:</label>
+                    <textarea class="field-input large"></textarea>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Entry 7 -->
+        <div class="entry-section">
+            <div class="entry-header">Day 7 - Final Breakthrough</div>
+            <div class="entry-content">
+                <div class="field-group">
+                    <label class="field-label">📅 Date:</label>
+                    <input type="text" class="field-input small">
+                </div>
+                <div class="field-group">
+                    <label class="field-label">🎭 Situation/Event:</label>
+                    <textarea class="field-input"></textarea>
+                </div>
+                <div class="field-group">
+                    <label class="field-label">🚫 Limiting Belief:</label>
+                    <textarea class="field-input"></textarea>
+                </div>
+                <div class="field-group">
+                    <label class="field-label">🔍 Challenge to Belief:</label>
+                    <textarea class="field-input large"></textarea>
+                </div>
+                <div class="field-group">
+                    <label class="field-label">✨ Reframed Empowering Belief:</label>
+                    <textarea class="field-input"></textarea>
+                </div>
+                <div class="field-group">
+                    <label class="field-label">📝 Observations & Outcome:</label>
+                    <textarea class="field-input large"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="tips-box">
+            <div class="tips-title">🌱 Reflection Questions for Review:</div>
+            • What patterns do you notice in your limiting beliefs? • Which reframed beliefs feel most natural to you? • What situations consistently trigger limiting thoughts? • How has your self-talk changed since starting this practice?
+        </div>
+
+        <div class="footer-note">
+            🌟 Remember: Transforming limiting beliefs is a journey, not a destination. Be patient and compassionate with yourself as you grow.
+        </div>
+    </div>
+</body>
+</html>
