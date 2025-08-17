@@ -16,6 +16,8 @@
             .page-break { page-break-after: always; }
         }
 
+
+
         body {
             font-family: 'Georgia', serif;
             line-height: 1.5;
@@ -197,22 +199,39 @@
 </head>
 
 <script>
-// Save all fields to localStorage
 function saveWorksheet() {
     document.querySelectorAll('.field-input').forEach((el, idx) => {
         localStorage.setItem('belieftracker_field_' + idx, el.value);
     });
+    updateProgress();
 }
 
-// Load all fields from localStorage
 function loadWorksheet() {
     document.querySelectorAll('.field-input').forEach((el, idx) => {
         const val = localStorage.getItem('belieftracker_field_' + idx);
         if (val !== null) el.value = val;
     });
+    updateProgress();
 }
 
-// Save on every change
+function updateProgress() {
+    // There are 7 days, each with 6 fields
+    const fields = Array.from(document.querySelectorAll('.entry-section'));
+    let filledDays = 0;
+    fields.forEach(section => {
+        // Check if any field in this day is filled
+        const inputs = section.querySelectorAll('.field-input');
+        if (Array.from(inputs).some(f => f.value.trim() !== '')) {
+            filledDays++;
+        }
+    });
+    const percent = Math.round((filledDays / 7) * 100);
+    const bar = document.getElementById('bt-progress');
+    const label = document.getElementById('bt-progress-label');
+    if (bar) bar.style.width = percent + '%';
+    if (label) label.textContent = filledDays + ' / 7 Days Complete';
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     loadWorksheet();
     document.querySelectorAll('.field-input').forEach((el) => {
@@ -220,12 +239,27 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 </script>
-</body>
-</html>
+
 
 <body>
     
-    <div class="worksheet-container">
+<div class="worksheet-container">
+    
+
+<!-- Progress bar with gamification indicator -->
+<div class="no-print" style="margin-bottom: 28px; position: relative;">
+  <div style="display: flex; align-items: center; gap: 12px;">
+    <span style="font-size: 1.2em; color: #10b981; font-weight: bold;">🏆 Progress:</span>
+    <div style="flex: 1; background: #e2e8f0; border-radius: 999px; height: 18px; overflow: hidden; position: relative; border: 1px solid #10b981;">
+      <div id="bt-progress" style="background: linear-gradient(90deg, #10b981 60%, #34d399 100%); height: 100%; width: 0%; transition: width 0.2s;"></div>
+      <span id="bt-progress-label" style="position: absolute; left: 50%; top: 0; transform: translateX(-50%); font-size: 12px; color: #065f46; font-weight: bold; line-height: 18px;">0% Complete</span>
+    </div>
+  </div>
+</div>
+
+
+
+
         <div class="worksheet-header">
             <div class="worksheet-title">Breakthrough Self-Limiting Beliefs Within 1 Week</div>
             <div class="worksheet-subtitle">7-Day Transformation Worksheet</div>
@@ -254,7 +288,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="entry-content">
                 <div class="field-group">
                     <label class="field-label">📅 Date:</label>
-                    <input type="text" class="field-input small" placeholder="e.g., March 15, 2025">
+                    <input type="date" class="field-input small" placeholder="e.g., March 15, 2025">
                 </div>
 
                 <div class="field-group">
@@ -290,7 +324,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="entry-content">
                 <div class="field-group">
                     <label class="field-label">📅 Date:</label>
-                    <input type="text" class="field-input small">
+                    <input type="date" class="field-input small">
                 </div>
 
                 <div class="field-group">
@@ -326,7 +360,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="entry-content">
                 <div class="field-group">
                     <label class="field-label">📅 Date:</label>
-                    <input type="text" class="field-input small">
+                    <input type="date" class="field-input small">
                 </div>
 
                 <div class="field-group">
@@ -364,7 +398,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="entry-content">
                 <div class="field-group">
                     <label class="field-label">📅 Date:</label>
-                    <input type="text" class="field-input small">
+                    <input type="date" class="field-input small">
                 </div>
 
                 <div class="field-group">
@@ -400,7 +434,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="entry-content">
                 <div class="field-group">
                     <label class="field-label">📅 Date:</label>
-                    <input type="text" class="field-input small">
+                    <input type="date" class="field-input small">
                 </div>
 
                 <div class="field-group">
@@ -436,7 +470,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="entry-content">
                 <div class="field-group">
                     <label class="field-label">📅 Date:</label>
-                    <input type="text" class="field-input small">
+                    <input type="date" class="field-input small">
                 </div>
                 <div class="field-group">
                     <label class="field-label">🎭 Situation/Event:</label>
@@ -467,7 +501,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="entry-content">
                 <div class="field-group">
                     <label class="field-label">📅 Date:</label>
-                    <input type="text" class="field-input small">
+                    <input type="date" class="field-input small">
                 </div>
                 <div class="field-group">
                     <label class="field-label">🎭 Situation/Event:</label>
@@ -496,6 +530,24 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="tips-title">🌱 Reflection Questions for Review:</div>
             • What patterns do you notice in your limiting beliefs? • Which reframed beliefs feel most natural to you? • What situations consistently trigger limiting thoughts? • How has your self-talk changed since starting this practice?
         </div>
+
+
+<!-- Call to Action -->
+<div class="tips-box no-print" style="display: flex; align-items: center; justify-content: space-between; gap: 12px; border: 2px solid #10b981; background: #ecfdf5;">
+  <div>
+    <div class="tips-title" style="color: #047857;">🎯 Take Your Breakthrough Further</div>
+    <div style="font-size: 11pt; color: #065f46; max-width: 500px;">
+      Join my free <strong>Mindful Agile Action Heroes</strong> newsletter for weekly mindset practices and exclusive workshop invites.
+    </div>
+  </div>
+  <a href="https://mindfulagile.substack.com/" 
+   target="_blank" rel="noopener"
+   style="background: #10b981; color: white; padding: 10px 16px; border-radius: 8px; text-decoration: none; font-weight: bold;">
+   Subscribe Free
+</a>
+</div>
+
+
 
         <div class="footer-note">
             🌟 Remember: Transforming limiting beliefs is a journey, not a destination. Be patient and compassionate with yourself as you grow.
